@@ -12,20 +12,40 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  final TextEditingController _textController = new TextEditingController();
   var from = "USD";
   var to = "BRL";
   var num = 0.0;
 
+  Future<void> convert(String? value) async{
+    double qtd = double.parse(value!);
+    var valor = await getCurrentCotation(from, to);
+
+    setState((){
+      num = qtd * valor;
+    });
+  }
+
   void setToCoin(String? value){
-    setState(){
-      to = value ?? "BRL";
-    }
+    _textController.clear();
+
+    setState((){
+      to = value!;
+      num = 0.0;
+    });
   }
 
   void setFromCoin(String? value){
-    setState(){
-      from = value ?? "USD";
-    }
+    _textController.clear();
+
+    setState((){
+      from = value!;
+      num = 0.0;
+    });
+  }
+
+  void buttonEvent(){
+    convert(_textController.text);
   }
 
   @override
@@ -40,6 +60,11 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             const Text(
               'Converter moeda:',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold
+              ),
             ),
 
             // Moeda a se converter
@@ -51,6 +76,11 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     const Text(
                       'De:',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
@@ -58,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                         value: from,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple),
+                        style: const TextStyle(color: Colors.deepPurple, fontSize:  25),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
@@ -89,8 +119,9 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: TextField(
-                onChanged: (String? value){
-
+                controller: _textController,
+                onSubmitted: (String? value){
+                    convert(value);
                 },
                 keyboardType: TextInputType.number,
                 obscureText: false,
@@ -110,6 +141,11 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     const Text(
                       'Para:',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
@@ -117,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                         value: to,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple),
+                        style: const TextStyle(color: Colors.deepPurple, fontSize: 25),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
@@ -146,9 +182,29 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
               child: Text(
-                "0.0",
+                "$num",
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold
+                ),
               ),
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+              child: RaisedButton(
+                child: Text(
+                  "Converter",
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.blue,
+                onPressed: buttonEvent,//evento do botão
+              ),
+            ),
           ],
         ),
       ),
