@@ -11,12 +11,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  var from = "USD";
+  var to = "BRL";
+  var num = 0.0;
+
+  void setToCoin(String? value){
+    setState(){
+      to = value ?? "BRL";
+    }
+  }
+
+  void setFromCoin(String? value){
+    setState(){
+      from = value ?? "USD";
+    }
   }
 
   @override
@@ -30,20 +39,119 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Converter moeda:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+
+            // Moeda a se converter
+
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'De:',
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                      child: DropdownButton<String>(
+                        value: from,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String? value){
+                          setFromCoin(value);
+                        },
+                        items: <String>[
+                          "USD",
+                          "BRL",
+                          "EUR",
+                          "BTC",
+                          "ADA",
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    )
+                  ]
+              ),
             ),
+
+            // Valor a se inserir
+
+            Padding(
+              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+              child: TextField(
+                onChanged: (String? value){
+
+                },
+                keyboardType: TextInputType.number,
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Value',
+                ),
+              ),
+            ),
+
+            // Moeda para qual sera convertido
+
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Para:',
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                      child: DropdownButton<String>(
+                        value: to,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String? value){
+                          setToCoin(value);
+                        },
+                        items: <String>[
+                          "USD",
+                          "BRL",
+                          "EUR",
+                          "BTC",
+                          "ADA"
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    )
+                  ]
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+              child: Text(
+                "0.0",
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
