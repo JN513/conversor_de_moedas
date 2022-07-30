@@ -1,10 +1,10 @@
 import 'package:conversor_de_moedas/core/api_client.dart';
+import 'package:conversor_de_moedas/pages/compost.dart';
+import 'package:conversor_de_moedas/pages/simple.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -52,7 +52,47 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Conversor de moedas."),
+      ),
+      drawer: Drawer(
+          child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Text('Menu'),
+                ),
+                ListTile(
+                  title: const Text('Converter moedas'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text('Calculadora de juros simples'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SimplePage()),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text('Calculadora de juros compostos'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const CompostPage()),
+                    );
+                  },
+                ),
+              ]
+          ),
       ),
       body: Center(
         child: Column(
@@ -77,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       'De:',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 30,
                           color: Colors.blue,
                           fontWeight: FontWeight.bold
                       ),
@@ -88,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         value: from,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple, fontSize:  25),
+                        style: const TextStyle(color: Colors.deepPurple, fontSize:  30),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
@@ -142,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       'Para:',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 30,
                           color: Colors.blue,
                           fontWeight: FontWeight.bold
                       ),
@@ -153,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                         value: to,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple, fontSize: 25),
+                        style: const TextStyle(color: Colors.deepPurple, fontSize: 30),
                         underline: Container(
                           height: 2,
                           color: Colors.deepPurpleAccent,
@@ -184,7 +224,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 "$num",
                 style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 35,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold
                 ),
@@ -192,16 +232,15 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Text(
                   "Converter",
                   style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 35,
                       color: Colors.white,
                       fontWeight: FontWeight.bold
                   ),
                 ),
-                color: Colors.blue,
                 onPressed: buttonEvent,//evento do botão
               ),
             ),

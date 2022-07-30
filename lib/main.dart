@@ -16,7 +16,7 @@ class Conversor extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: "Conversor de moedas."),
+      home: HomePage(),
     );
   }
 }
