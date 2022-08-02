@@ -11,9 +11,19 @@ Drawer Header (context){
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/bitcoin.jpg'),
+                fit: BoxFit.cover,
+              ),
               color: Colors.blue,
             ),
-            child: Text('Menu'),
+            child: Text('Finance Utilities',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
+                )
+            ),
           ),
           ListTile(
             title: const Text('Converter moedas'),
@@ -40,6 +50,12 @@ Drawer Header (context){
                 context,
                 MaterialPageRoute(builder: (context) => const CompostPage()),
               );
+            },
+          ),
+          ListTile(
+            title: const Text('Sair'),
+            onTap: () {
+              Navigator.pop(context);
             },
           ),
         ]

@@ -21,7 +21,11 @@ class _HomePageState extends State<HomePage> {
     double qtd = double.parse(value!);
 
     setState((){
-      num = qtd * cotation;
+      if(_textController.text.isEmpty){
+        num = 0.0;
+      } else {
+        num = qtd * cotation;
+      }
     });
   }
 
@@ -74,142 +78,144 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: Header(context),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Converter moeda:',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-
-            // Moeda a se converter
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'De:',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
-                      child: DropdownButton<String>(
-                        value: from,
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple, fontSize:  30),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        onChanged: (String? value){
-                          setFromCoin(value);
-                        },
-                        items: <String>[
-                          "USD",
-                          "BRL",
-                          "EUR",
-                          "BTC",
-                          "ADA",
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )
-                  ]
-              ),
-            ),
-
-            // Valor a se inserir
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-              child: TextField(
-                controller: _textController,
-                onChanged: (String? value){
-                    convert(value);
-                },
-                keyboardType: TextInputType.number,
-                obscureText: false,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Value',
-                ),
-              ),
-            ),
-
-            // Moeda para qual sera convertido
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'Para:',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
-                      child: DropdownButton<String>(
-                        value: to,
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple, fontSize: 30),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        onChanged: (String? value){
-                          setToCoin(value);
-                        },
-                        items: <String>[
-                          "USD",
-                          "BRL",
-                          "EUR",
-                          "BTC",
-                          "ADA"
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )
-                  ]
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-              child: Text(
-                "${num.toStringAsFixed(2)}",
-                style: const TextStyle(
-                    fontSize: 35,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Converter moeda:',
+                style: TextStyle(
+                    fontSize: 25,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold
                 ),
               ),
-            ),
-          ],
+
+              // Moeda a se converter
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        'De:',
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                        child: DropdownButton<String>(
+                          value: from,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.deepPurple, fontSize:  30),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? value){
+                            setFromCoin(value);
+                          },
+                          items: <String>[
+                            "USD",
+                            "BRL",
+                            "EUR",
+                            "BTC",
+                            "ADA",
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      )
+                    ]
+                ),
+              ),
+
+              // Valor a se inserir
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: TextField(
+                  controller: _textController,
+                  onChanged: (String? value){
+                    convert(value);
+                  },
+                  keyboardType: TextInputType.number,
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Value',
+                  ),
+                ),
+              ),
+
+              // Moeda para qual sera convertido
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        'Para:',
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                        child: DropdownButton<String>(
+                          value: to,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.deepPurple, fontSize: 30),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? value){
+                            setToCoin(value);
+                          },
+                          items: <String>[
+                            "USD",
+                            "BRL",
+                            "EUR",
+                            "BTC",
+                            "ADA"
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      )
+                    ]
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                child: Text(
+                  "${num.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                      fontSize: 35,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
