@@ -11,22 +11,28 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final TextEditingController _textController = new TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   var from = "USD";
   var to = "BRL";
   var num = 0.0;
+  var cotation = 0.0;
 
-  Future<void> convert(String? value) async{
+  void convert(String? value)   {
     double qtd = double.parse(value!);
-    var valor = await getCurrentCotation(from, to);
 
     setState((){
-      num = qtd * valor;
+      num = qtd * cotation;
     });
+  }
+
+  Future<void> updateCotation() async {
+    cotation = await getCurrentCotation(from, to);
   }
 
   void setToCoin(String? value){
     _textController.clear();
+
+    updateCotation();
 
     setState((){
       to = value!;
@@ -34,8 +40,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void setFromCoin(String? value){
+  void setFromCoin(String? value) {
     _textController.clear();
+
+    updateCotation();
 
     setState((){
       from = value!;
@@ -48,10 +56,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState(){
+    super.initState();
+
+    updateCotation();
+
+    setState((){
+      num = 0.0;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Conversor de moedas."),
+        title: const Text("Conversor de moedas."),
       ),
       drawer: Header(context),
       body: Center(
@@ -70,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             // Moeda a se converter
 
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -83,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                      padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
                       child: DropdownButton<String>(
                         value: from,
                         icon: const Icon(Icons.arrow_downward),
@@ -117,15 +136,15 @@ class _HomePageState extends State<HomePage> {
             // Valor a se inserir
 
             Padding(
-              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: TextField(
                 controller: _textController,
-                onSubmitted: (String? value){
+                onChanged: (String? value){
                     convert(value);
                 },
                 keyboardType: TextInputType.number,
                 obscureText: false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Value',
                 ),
@@ -135,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             // Moeda para qual sera convertido
 
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -148,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                      padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
                       child: DropdownButton<String>(
                         value: to,
                         icon: const Icon(Icons.arrow_downward),
@@ -180,28 +199,14 @@ class _HomePageState extends State<HomePage> {
             ),
 
             Padding(
-              padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+              padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
               child: Text(
-                "$num",
-                style: TextStyle(
+                "${num.toStringAsFixed(2)}",
+                style: const TextStyle(
                     fontSize: 35,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-              child: ElevatedButton(
-                child: Text(
-                  "Converter",
-                  style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-                onPressed: buttonEvent,//evento do botão
               ),
             ),
           ],
