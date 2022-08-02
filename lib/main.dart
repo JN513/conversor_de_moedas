@@ -1,18 +1,18 @@
-import 'package:conversor_de_moedas/pages/home.dart';
+import 'package:finance_utilities/pages/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const Conversor());
+  runApp(const Finance_Utilities());
 }
 
-class Conversor extends StatelessWidget {
-  const Conversor({Key? key}) : super(key: key);
+class Finance_Utilities extends StatelessWidget {
+  const Finance_Utilities({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Conversor',
+      title: 'Finance Utilities',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

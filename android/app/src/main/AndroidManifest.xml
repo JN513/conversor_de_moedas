@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.conversor_de_moedas">
+    package="com.example.finance_utilities">
    <application
-        android:label="conversor_de_moedas"
+        android:label="finance_utilities"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

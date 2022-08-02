@@ -1,6 +1,8 @@
-# Conversor de moedas.
+# Finance Utilities.
 
-Conversor de moedas.
+Ferramenta para ajuda em gestão financeira, 
+oferece conversão de moedas em tempo real, 
+calculo de juros simples e compostos.
 
 ## Getting Started
 

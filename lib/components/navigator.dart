@@ -1,6 +1,6 @@
-import 'package:conversor_de_moedas/pages/home.dart';
-import 'package:conversor_de_moedas/pages/simple.dart';
-import 'package:conversor_de_moedas/pages/compost.dart';
+import 'package:finance_utilities/pages/home.dart';
+import 'package:finance_utilities/pages/simple.dart';
+import 'package:finance_utilities/pages/compost.dart';
 import 'package:flutter/material.dart';
 
 

@@ -1,5 +1,5 @@
-import 'package:conversor_de_moedas/core/api_client.dart';
-import 'package:conversor_de_moedas/components/navigator.dart';
+import 'package:finance_utilities/core/api_client.dart';
+import 'package:finance_utilities/components/navigator.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

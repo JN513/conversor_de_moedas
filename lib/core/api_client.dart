@@ -1,4 +1,4 @@
-import 'package:conversor_de_moedas/utils/constants.dart';
+import 'package:finance_utilities/utils/constants.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:async';
