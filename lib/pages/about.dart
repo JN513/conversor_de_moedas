@@ -16,13 +16,68 @@ class AboutPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Finance Utilities",
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold
-                  )
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Finance Utilities",
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    )
+                ),
               ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Versão: 0.0.2",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    )
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Desenvolvido por:",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    )
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Julio Nunes Avelar",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    )
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Licença: MIT",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    )
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Copyright © 2022",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    )
+                ),
+              ),
+              // Url repository text
+
             ],
           ),
         ),

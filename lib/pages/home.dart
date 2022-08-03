@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 'Converter moeda:',
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.blue,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold
                 ),
               ),
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                         'De:',
                         style: TextStyle(
                             fontSize: 30,
-                            color: Colors.blue,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold
                         ),
                       ),
@@ -112,10 +112,10 @@ class _HomePageState extends State<HomePage> {
                           value: from,
                           icon: const Icon(Icons.arrow_downward),
                           elevation: 16,
-                          style: const TextStyle(color: Colors.deepPurple, fontSize:  30),
+                          style: const TextStyle(color: Colors.black, fontSize:  30),
                           underline: Container(
                             height: 2,
-                            color: Colors.deepPurpleAccent,
+                            color: Colors.black,
                           ),
                           onChanged: (String? value){
                             setFromCoin(value);
@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                         'Para:',
                         style: TextStyle(
                             fontSize: 30,
-                            color: Colors.blue,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold
                         ),
                       ),
@@ -177,10 +177,10 @@ class _HomePageState extends State<HomePage> {
                           value: to,
                           icon: const Icon(Icons.arrow_downward),
                           elevation: 16,
-                          style: const TextStyle(color: Colors.deepPurple, fontSize: 30),
+                          style: const TextStyle(color: Colors.black, fontSize: 30),
                           underline: Container(
                             height: 2,
-                            color: Colors.deepPurpleAccent,
+                            color: Colors.black,
                           ),
                           onChanged: (String? value){
                             setToCoin(value);
@@ -209,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                   "${num.toStringAsFixed(2)}",
                   style: const TextStyle(
                       fontSize: 35,
-                      color: Colors.blue,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold
                   ),
                 ),

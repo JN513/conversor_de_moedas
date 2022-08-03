@@ -14,7 +14,7 @@ class Finance_Utilities extends StatelessWidget {
     return MaterialApp(
       title: 'Finance Utilities',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: HomePage(),
     );
