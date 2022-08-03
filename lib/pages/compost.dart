@@ -28,7 +28,7 @@ class _CompostPageState extends State<CompostPage> {
     });
   }
 
-  void calculate(){
+  void calculate() {
     String initialValueText = _initialValueTextControler.text;
     String monthlyValueText = _monthlyValueTextControler.text;
     String rateText = _rateTextControler.text;
@@ -41,34 +41,78 @@ class _CompostPageState extends State<CompostPage> {
     double period = 0.0;
     double finalValue = 0.0;
 
-    if(initialValueText.isEmpty) {
+    if (initialValueText.isEmpty) {
       initialValue = 0.0;
     } else {
       initialValue = double.parse(initialValueText);
     }
 
-    if(monthlyValueText.isEmpty) {
+    if (monthlyValueText.isEmpty) {
       monthlyValue = 0.0;
     } else {
       monthlyValue = double.parse(monthlyValueText);
     }
 
-    if(rateText.isEmpty) {
+    if (rateText.isEmpty) {
       rate = 0.0;
     } else {
       rate = double.parse(rateText);
     }
 
-    if(periodText.isEmpty) {
+    if (periodText.isEmpty) {
       period = 0.0;
     } else {
       period = double.parse(periodText);
     }
 
-    if(finalValueText.isEmpty) {
+    if (finalValueText.isEmpty) {
       finalValue = 0.0;
     } else {
       finalValue = double.parse(finalValueText);
+    }
+
+    if (initialValue == 0 && monthlyValue == 0 && rate == 0 && period == 0 &&
+        finalValue == 0) {
+      return;
+    } else
+    if (initialValue == 0 && monthlyValue != 0 && rate != 0 && period != 0 &&
+        finalValue != 0) {
+      setState(() {
+        _initialValueTextControler.text =
+            (finalValue / (1 + (rate / 100) * period)).toString();
+      });
+    } else
+    if (initialValue != 0 && monthlyValue == 0 && rate != 0 && period != 0 &&
+        finalValue != 0) {
+      setState(() {
+        _monthlyValueTextControler.text =
+            (initialValue * (1 + (rate / 100) * period)).toString();
+      });
+    } else
+    if (initialValue != 0 && monthlyValue != 0 && rate == 0 && period != 0 &&
+        finalValue != 0) {
+      setState(() {
+        _rateTextControler.text =
+            ((finalValue - initialValue) / (monthlyValue - initialValue))
+                .toString();
+      });
+    } else
+    if (initialValue != 0 && monthlyValue != 0 && rate != 0 && period == 0 &&
+        finalValue != 0) {
+      setState(() {
+        _periodValueTextControler.text =
+            ((finalValue - initialValue) / (monthlyValue - initialValue))
+                .toString();
+      });
+    } else
+    if (initialValue != 0 && monthlyValue != 0 && rate != 0 && period != 0 &&
+        finalValue == 0) {
+      setState(() {
+        _finalValueTextControler.text =
+            (monthlyValue * (1 + (rate / 100) * period)).toString();
+      });
+    } else {
+      return;
     }
   }
 
@@ -80,95 +124,97 @@ class _CompostPageState extends State<CompostPage> {
       ),
       drawer: Header(context),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: Text("Valor inicial:"),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: TextField(
-                controller: _initialValueTextControler,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Valor inicial:",
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Valor inicial:"),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: TextField(
+                  controller: _initialValueTextControler,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Valor inicial:",
+                  ),
+                ),
+              ),Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Valor Mensal:"),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: TextField(
+                  controller: _monthlyValueTextControler,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Valor Mensal:",
+                  ),
                 ),
               ),
-            ),Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: Text("Valor Mensal:"),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: TextField(
-                controller: _monthlyValueTextControler,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Valor Mensal:",
-                ),
-              ),
-            ),
 
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: Text("Taxa de juros:"),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: TextField(
-                controller: _rateTextControler,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Taxa de juros:",
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Taxa de juros:"),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: TextField(
+                  controller: _rateTextControler,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Taxa de juros:",
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: Text("Periodo:"),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: TextField(
-                controller: _periodValueTextControler,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Periodo:",
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Periodo:"),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: TextField(
+                  controller: _periodValueTextControler,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Periodo:",
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: Text("Valor final:"),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: TextField(
-                controller: _finalValueTextControler,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Valor final",
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: Text("Valor final:"),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: TextField(
+                  controller: _finalValueTextControler,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Valor final",
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              child: ElevatedButton(
-                child: Text("Calcular"),
-                onPressed: () {
-                  calculate();
-                },
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: ElevatedButton(
+                  child: Text("Calcular"),
+                  onPressed: () {
+                    calculate();
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        )
       ),
     );
   }
