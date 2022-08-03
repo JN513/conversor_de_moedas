@@ -36,23 +36,23 @@ class _HomePageState extends State<HomePage> {
   void setToCoin(String? value){
     _textController.clear();
 
-    updateCotation();
-
     setState((){
       to = value!;
       num = 0.0;
     });
+
+    updateCotation();
   }
 
   void setFromCoin(String? value) {
     _textController.clear();
 
-    updateCotation();
-
     setState((){
       from = value!;
       num = 0.0;
     });
+
+    updateCotation();
   }
 
   void buttonEvent(){
