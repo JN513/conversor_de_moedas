@@ -1,6 +1,7 @@
 import 'package:finance_utilities/pages/home.dart';
 import 'package:finance_utilities/pages/simple.dart';
 import 'package:finance_utilities/pages/compost.dart';
+import 'package:finance_utilities/pages/about.dart';
 import 'package:flutter/material.dart';
 
 
@@ -49,6 +50,15 @@ Drawer Header (context){
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const CompostPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Sobre'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutPage()),
               );
             },
           ),
